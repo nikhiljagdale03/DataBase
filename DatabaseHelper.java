@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.rawQuery(query, null);
     }
 
-    public void insertUser(UserModel userModel) {
+    public boolean insertUser(UserModel userModel) {
         SQLiteDatabase writableDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(NAME,userModel.getName());
@@ -39,6 +39,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(USERNAME,userModel.getUsername());
         contentValues.put(PASSWORD,userModel.getPassword());
         long insert = writableDatabase.insert(TABLE_NAME, null, contentValues);
+        return insert != -1;
+
     }
 
     @Override
